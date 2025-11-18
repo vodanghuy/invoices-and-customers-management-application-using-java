@@ -1,7 +1,9 @@
 package io.huyvo.securecapita.repository.implementation;
 
 import io.huyvo.securecapita.exception.ApiException;
+import io.huyvo.securecapita.model.Role;
 import io.huyvo.securecapita.model.User;
+import io.huyvo.securecapita.repository.RoleRepository;
 import io.huyvo.securecapita.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import static io.huyvo.securecapita.enumeration.RoleType.*;
 import static io.huyvo.securecapita.query.UserQuery.COUNT_USER_EMAIL_QUERY;
 import static io.huyvo.securecapita.query.UserQuery.INSERT_USER_QUERY;
 import static java.util.Objects.requireNonNull;
@@ -34,6 +37,8 @@ public class UserRepositoryImpl implements UserRepository<User> {
         Mac dinh: String sql = "SELECT * FROM users WHERE username = ?";
      */
 
+    private final RoleRepository<Role> roleRepository;
+
     @Override
     public User create(User user) {
         // Check the email is unique
@@ -49,6 +54,8 @@ public class UserRepositoryImpl implements UserRepository<User> {
             jdbc.update(INSERT_USER_QUERY, parameter, keyHolder);
             // Gan ID vua duoc tao vao doi tuong user
             user.setId(requireNonNull(keyHolder.getKey()).longValue());
+            // Add role to user
+            roleRepository.addRoleToUser(user.getId(), ROLE_USER.name());
         }
         catch (Exception e)
         {
