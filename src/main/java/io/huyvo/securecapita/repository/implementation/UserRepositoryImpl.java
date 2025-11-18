@@ -14,14 +14,16 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static io.huyvo.securecapita.enumeration.RoleType.*;
-import static io.huyvo.securecapita.query.UserQuery.COUNT_USER_EMAIL_QUERY;
-import static io.huyvo.securecapita.query.UserQuery.INSERT_USER_QUERY;
+import static io.huyvo.securecapita.enumeration.VerificationType.*;
+import static io.huyvo.securecapita.query.UserQuery.*;
 import static java.util.Objects.requireNonNull;
 
 @Repository
@@ -56,12 +58,18 @@ public class UserRepositoryImpl implements UserRepository<User> {
             user.setId(requireNonNull(keyHolder.getKey()).longValue());
             // Add role to user
             roleRepository.addRoleToUser(user.getId(), ROLE_USER.name());
+            // Send verification URL
+            String verificationURL = getVerificationUrl(UUID.randomUUID().toString(), ACCOUNT.getType());
+            // Save URL in AccountVerifications table
+            jdbc.update(INSERT_ACCOUNT_VERIFICATION_QUERY, Map.of("userId", user.getId(), "url", verificationURL));
+            user.setEnabled(false);
+            user.setIsNotLocked(true);
+            return user;
         }
         catch (Exception e)
         {
             throw new ApiException("An error occurred!");
         }
-        return null;
     }
 
     @Override
@@ -101,5 +109,15 @@ public class UserRepositoryImpl implements UserRepository<User> {
                 .addValue("lastName", user.getFirstName())
                 .addValue("email", user.getEmail())
                 .addValue("password", encoder.encode(user.getPassword()));
+    }
+
+    private String getVerificationUrl(String key, String type) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/verify/"+type+"/"+key).toUriString();
+        /*
+            - ServletUriComponentsBuilder.fromCurrentContextPath():
+              + Lấy domain + port hiện tại của server.
+              + Ví dụ, nếu API đang chạy tại: http://localhost:8080
+            - .path("/user/verify/" + type + "/" + key): nối thêm phần đường dẫn (path) vào URL.
+         */
     }
 }
