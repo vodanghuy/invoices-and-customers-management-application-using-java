@@ -1,4 +1,6 @@
 spring:
+  autoconfiguration:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration # Turn off security auto configuration
   datasource:
     url: jdbc:mysql://localhost:3306/securecapita
     password: iamdaghuy

@@ -60,6 +60,8 @@ public class UserRepositoryImpl implements UserRepository<User> {
         }
         catch (Exception e)
         {
+            log.error(e.getMessage());
+            // It tells us where the error occurring
             throw new ApiException("An error occurred!");
         }
     }
