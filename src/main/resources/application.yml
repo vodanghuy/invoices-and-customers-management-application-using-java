@@ -16,5 +16,5 @@ spring:
         format_sql: true
   sql:
     init:
-      mode: always #Run the schema.sql file
+      mode: never #Run the schema.sql file
       continue-on-error: false #Stop the application if errors found
