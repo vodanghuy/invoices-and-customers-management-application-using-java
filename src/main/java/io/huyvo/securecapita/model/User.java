@@ -35,5 +35,6 @@ public class User {
     private Boolean enabled;
     private Boolean isNotLocked;
     private Boolean isUsingMfa;
+    private String imageUrl;
     private LocalDateTime createdAt;
 }

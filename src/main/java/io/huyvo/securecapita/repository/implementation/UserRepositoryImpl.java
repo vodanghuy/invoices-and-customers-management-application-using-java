@@ -3,6 +3,7 @@ package io.huyvo.securecapita.repository.implementation;
 import io.huyvo.securecapita.exception.ApiException;
 import io.huyvo.securecapita.model.*;
 import io.huyvo.securecapita.repository.*;
+import io.huyvo.securecapita.rowmapper.UserRowMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.namedparam.*;
@@ -84,6 +85,11 @@ public class UserRepositoryImpl implements UserRepository<User> {
     @Override
     public Boolean delete(Long id) {
         return null;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return jdbc.queryForObject(SELECT_USER_BY_EMAIL_QUERY, Map.of("email", email), new UserRowMapper());
     }
 
     private int getEmailCount(String email) {
