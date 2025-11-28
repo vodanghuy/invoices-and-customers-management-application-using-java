@@ -7,6 +7,7 @@ import io.huyvo.securecapita.repository.*;
 import io.huyvo.securecapita.rowmapper.UserRowMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.jdbc.core.namedparam.*;
 import org.springframework.jdbc.support.*;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,13 +22,17 @@ import java.util.*;
 import static io.huyvo.securecapita.enumeration.RoleType.*;
 import static io.huyvo.securecapita.enumeration.VerificationType.*;
 import static io.huyvo.securecapita.query.UserQuery.*;
+import static io.huyvo.securecapita.utils.SmsUtils.sendSms;
 import static java.util.Objects.requireNonNull;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.apache.commons.lang3.time.DateUtils.addDays;
 
 @Repository
 @RequiredArgsConstructor
 @Slf4j
 public class UserRepositoryImpl implements UserRepository<User>, UserDetailsService {
 
+    private static final String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
     private final NamedParameterJdbcTemplate jdbc;
     private final BCryptPasswordEncoder encoder;
     /*
@@ -98,7 +103,16 @@ public class UserRepositoryImpl implements UserRepository<User>, UserDetailsServ
 
     @Override
     public void sendVerificationCode(UserDTO userDTO) {
-
+        String expirationDate = DateFormatUtils.format(addDays(new Date(), 1), DATE_FORMAT);
+        String verificationCode = randomAlphabetic(8);
+        try{
+            jdbc.update(DELETE_VERIFICATION_CODE_BY_USER_ID_QUERY, Map.of("userId", userDTO.getId()));
+            jdbc.update(INSERT_VERIFICATION_CODE_QUERY, Map.of("userId", userDTO.getId(), "verificationCode", verificationCode, "expirationDate", expirationDate));
+            sendSms(userDTO.getPhone(), "From SecureCapita:\nVerification Code\n" + verificationCode);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            throw new ApiException("An error occurred");
+        }
     }
 
     @Override
