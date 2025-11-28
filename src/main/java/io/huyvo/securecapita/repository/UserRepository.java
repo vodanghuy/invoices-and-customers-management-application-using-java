@@ -1,5 +1,6 @@
 package io.huyvo.securecapita.repository;
 
+import io.huyvo.securecapita.dto.UserDTO;
 import io.huyvo.securecapita.model.User;
 
 import java.util.Collection;
@@ -13,6 +14,8 @@ public interface UserRepository<T extends User>{
     Boolean delete(Long id);
 
     T getUserByEmail(String email);
+
+    void sendVerificationCode(UserDTO userDTO);
 
     /* More Complex Operations */
 }

@@ -28,15 +28,7 @@ public class UserResource {
     public ResponseEntity<HttpResponse> login(@RequestBody @Valid LoginForm loginForm){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.getEmail(), loginForm.getPassword()));
         UserDTO userDTO = userService.getUserByEmail(loginForm.getEmail());
-        return ResponseEntity.ok().body(
-                HttpResponse.builder()
-                        .timeStamp(LocalDateTime.now().toString())
-                        .statusCode(HttpStatus.OK.value())
-                        .status(HttpStatus.OK)
-                        .message("Login successfully")
-                        .data(Map.of("user", userDTO))
-                        .build()
-        );
+        return userDTO.getIsUsingMfa() ? sendVerificationCode(userDTO) : sendResponse(userDTO);
     }
 
     @PostMapping("/register")
@@ -54,5 +46,30 @@ public class UserResource {
 
     private URI getUri(){
         return URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/get/<userId>").toUriString());
+    }
+
+    private ResponseEntity<HttpResponse> sendResponse(UserDTO userDTO) {
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .message("Login successfully")
+                        .data(Map.of("user", userDTO))
+                        .build()
+        );
+    }
+
+    private ResponseEntity<HttpResponse> sendVerificationCode(UserDTO userDTO) {
+        userService.sendVerificationCode(userDTO);
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .message("Login successfully")
+                        .data(Map.of("user", userDTO))
+                        .build()
+        );
     }
 }

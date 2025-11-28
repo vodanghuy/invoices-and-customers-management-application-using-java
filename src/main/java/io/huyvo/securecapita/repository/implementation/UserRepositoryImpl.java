@@ -1,5 +1,6 @@
 package io.huyvo.securecapita.repository.implementation;
 
+import io.huyvo.securecapita.dto.UserDTO;
 import io.huyvo.securecapita.exception.ApiException;
 import io.huyvo.securecapita.model.*;
 import io.huyvo.securecapita.repository.*;
@@ -93,6 +94,11 @@ public class UserRepositoryImpl implements UserRepository<User>, UserDetailsServ
     @Override
     public User getUserByEmail(String email) {
         return jdbc.queryForObject(SELECT_USER_BY_EMAIL_QUERY, Map.of("email", email), new UserRowMapper());
+    }
+
+    @Override
+    public void sendVerificationCode(UserDTO userDTO) {
+
     }
 
     @Override
