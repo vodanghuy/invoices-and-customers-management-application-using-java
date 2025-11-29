@@ -3,6 +3,8 @@ package io.huyvo.securecapita.resource;
 import io.huyvo.securecapita.dto.UserDTO;
 import io.huyvo.securecapita.form.LoginForm;
 import io.huyvo.securecapita.model.*;
+import io.huyvo.securecapita.provider.TokenProvider;
+import io.huyvo.securecapita.service.RoleService;
 import io.huyvo.securecapita.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,8 @@ public class UserResource {
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
+    private final TokenProvider tokenProvider;
+    private final RoleService roleService;
 
     @PostMapping("/login")
     public ResponseEntity<HttpResponse> login(@RequestBody @Valid LoginForm loginForm){
@@ -48,16 +52,23 @@ public class UserResource {
         return URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/get/<userId>").toUriString());
     }
 
-    private ResponseEntity<HttpResponse> sendResponse(UserDTO userDTO) {
+    private ResponseEntity<HttpResponse> sendResponse(UserDTO user) {
         return ResponseEntity.ok().body(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now().toString())
                         .statusCode(HttpStatus.OK.value())
                         .status(HttpStatus.OK)
                         .message("Login successfully")
-                        .data(Map.of("user", userDTO))
+                        .data(Map.of("user", user,
+                                "accessToken", tokenProvider.createAccessToken(getUserPrincipal(user)),
+                                "refreshToken", tokenProvider.createRefreshToken(getUserPrincipal(user))
+                        ))
                         .build()
         );
+    }
+
+    private UserPrincipal getUserPrincipal(UserDTO user) {
+        return new UserPrincipal(userService.getUser(user.getEmail()), roleService.getRoleByUserId(user.getId()).getPermissions());
     }
 
     private ResponseEntity<HttpResponse> sendVerificationCode(UserDTO userDTO) {
