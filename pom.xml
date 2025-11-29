@@ -85,6 +85,11 @@
 			<version>11.1.0</version>
 		</dependency>
 		<!-- Hỗ trợ chức năng gửi sms, gọi điện thoại -->
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.5.0</version>
+		</dependency>
 	</dependencies>
 
 	<profiles>
