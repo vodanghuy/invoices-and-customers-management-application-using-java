@@ -8,6 +8,7 @@ import io.huyvo.securecapita.rowmapper.UserRowMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.*;
 import org.springframework.jdbc.support.*;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -104,12 +105,33 @@ public class UserRepositoryImpl implements UserRepository<User>, UserDetailsServ
     @Override
     public void sendVerificationCode(UserDTO userDTO) {
         String expirationDate = DateFormatUtils.format(addDays(new Date(), 1), DATE_FORMAT);
-        String verificationCode = randomAlphabetic(8);
+        String verificationCode = randomAlphabetic(8).toUpperCase();
         try{
             jdbc.update(DELETE_VERIFICATION_CODE_BY_USER_ID_QUERY, Map.of("userId", userDTO.getId()));
             jdbc.update(INSERT_VERIFICATION_CODE_QUERY, Map.of("userId", userDTO.getId(), "verificationCode", verificationCode, "expirationDate", expirationDate));
-            sendSms(userDTO.getPhone(), "From SecureCapita:\nVerification Code\n" + verificationCode);
+            //sendSms(userDTO.getPhone(), "From SecureCapita:\nVerification Code\n" + verificationCode);
         }catch (Exception e){
+            log.error(e.getMessage());
+            throw new ApiException("An error occurred");
+        }
+    }
+
+    @Override
+    public User verifyCode(String email, String code) {
+        try{
+            User userByCode = jdbc.queryForObject(SELECT_USER_BY_CODE_QUERY, Map.of("code", code), new UserRowMapper());
+            User userByEmail = jdbc.queryForObject(SELECT_USER_BY_EMAIL_QUERY, Map.of("email", email), new UserRowMapper());
+            if(userByCode.getEmail().equalsIgnoreCase(userByEmail.getEmail())){
+                jdbc.update(DELETE_CODE, Map.of("code", code));
+                return userByCode;
+            }
+            else{
+                throw new ApiException("Invalid code. Please try again!");
+            }
+        }catch (EmptyResultDataAccessException e){
+            throw new ApiException("Could not find the record");
+        }
+        catch (Exception e){
             log.error(e.getMessage());
             throw new ApiException("An error occurred");
         }

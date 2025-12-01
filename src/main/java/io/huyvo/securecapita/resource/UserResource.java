@@ -48,6 +48,23 @@ public class UserResource {
                         .build());
     }
 
+    @GetMapping("/verify/code/{email}/{code}")
+    public ResponseEntity<HttpResponse> verifyCode(@PathVariable("email") String email, @PathVariable("code") String code){
+        UserDTO user = userService.verifyCode(email, code);
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .message("Login successfully")
+                        .data(Map.of("user", user,
+                                "accessToken", tokenProvider.createAccessToken(getUserPrincipal(user)),
+                                "refreshToken", tokenProvider.createRefreshToken(getUserPrincipal(user))
+                        ))
+                        .build()
+        );
+    }
+
     private URI getUri(){
         return URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/get/<userId>").toUriString());
     }
@@ -78,7 +95,7 @@ public class UserResource {
                         .timeStamp(LocalDateTime.now().toString())
                         .statusCode(HttpStatus.OK.value())
                         .status(HttpStatus.OK)
-                        .message("Login successfully")
+                        .message("Verification code sent.")
                         .data(Map.of("user", userDTO))
                         .build()
         );
