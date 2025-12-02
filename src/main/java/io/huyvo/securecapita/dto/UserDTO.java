@@ -1,12 +1,10 @@
 package io.huyvo.securecapita.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-
 import java.time.LocalDateTime;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
@@ -22,4 +20,6 @@ public class UserDTO {
     private Boolean isNotLocked;
     private Boolean isUsingMfa;
     private LocalDateTime createdAt;
+    private String roleName;
+    private String permissions;
 }
