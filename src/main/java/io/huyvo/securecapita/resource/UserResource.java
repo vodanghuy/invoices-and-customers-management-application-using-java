@@ -1,6 +1,7 @@
 package io.huyvo.securecapita.resource;
 
 import io.huyvo.securecapita.dto.UserDTO;
+import io.huyvo.securecapita.dtomapper.UserDTOMapper;
 import io.huyvo.securecapita.form.LoginForm;
 import io.huyvo.securecapita.model.*;
 import io.huyvo.securecapita.provider.TokenProvider;
@@ -85,7 +86,7 @@ public class UserResource {
     }
 
     private UserPrincipal getUserPrincipal(UserDTO user) {
-        return new UserPrincipal(userService.getUser(user.getEmail()), roleService.getRoleByUserId(user.getId()).getPermissions());
+        return new UserPrincipal(UserDTOMapper.toUser(userService.getUserByEmail(user.getEmail())), roleService.getRoleByUserId(user.getId()).getPermissions());
     }
 
     private ResponseEntity<HttpResponse> sendVerificationCode(UserDTO userDTO) {

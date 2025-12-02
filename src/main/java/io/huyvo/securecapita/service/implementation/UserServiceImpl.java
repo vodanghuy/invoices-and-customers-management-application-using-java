@@ -30,11 +30,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(String email) {
-        return userRepository.getUserByEmail(email);
-    }
-
-    @Override
     public UserDTO verifyCode(String email, String code) {
         return UserDTOMapper.fromUser(userRepository.verifyCode(email, code));
     }
