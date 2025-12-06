@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -62,6 +63,20 @@ public class UserResource {
                                 "accessToken", tokenProvider.createAccessToken(getUserPrincipal(user)),
                                 "refreshToken", tokenProvider.createRefreshToken(getUserPrincipal(user))
                         ))
+                        .build()
+        );
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<HttpResponse> profile(Authentication authentication){
+        UserDTO user = userService.getUserByEmail(authentication.getName());
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .message("Profile Retrieved")
+                        .data(Map.of("user", user))
                         .build()
         );
     }

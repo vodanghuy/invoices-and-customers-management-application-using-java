@@ -110,6 +110,7 @@ public class UserRepositoryImpl implements UserRepository<User>, UserDetailsServ
             jdbc.update(DELETE_VERIFICATION_CODE_BY_USER_ID_QUERY, Map.of("userId", userDTO.getId()));
             jdbc.update(INSERT_VERIFICATION_CODE_QUERY, Map.of("userId", userDTO.getId(), "verificationCode", verificationCode, "expirationDate", expirationDate));
             //sendSms(userDTO.getPhone(), "From SecureCapita:\nVerification Code\n" + verificationCode);
+            log.info("Verification code: {}", verificationCode);
         }catch (Exception e){
             log.error(e.getMessage());
             throw new ApiException("An error occurred");
