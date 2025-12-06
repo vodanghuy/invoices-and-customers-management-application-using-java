@@ -20,6 +20,8 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import static org.springframework.security.authentication.UsernamePasswordAuthenticationToken.unauthenticated;
+
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -32,7 +34,7 @@ public class UserResource {
 
     @PostMapping("/login")
     public ResponseEntity<HttpResponse> login(@RequestBody @Valid LoginForm loginForm){
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.getEmail(), loginForm.getPassword()));
+        authenticationManager.authenticate(unauthenticated(loginForm.getEmail(), loginForm.getPassword()));
         UserDTO userDTO = userService.getUserByEmail(loginForm.getEmail());
         return userDTO.getIsUsingMfa() ? sendVerificationCode(userDTO) : sendResponse(userDTO);
     }
