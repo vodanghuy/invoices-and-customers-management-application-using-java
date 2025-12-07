@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static io.huyvo.securecapita.utils.ExceptionUtils.processError;
 import static java.util.Arrays.asList;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
@@ -48,6 +49,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         }catch (Exception ex){
             log.error(ex.getMessage());
+            processError(request, response, ex);
         }
     }
 
