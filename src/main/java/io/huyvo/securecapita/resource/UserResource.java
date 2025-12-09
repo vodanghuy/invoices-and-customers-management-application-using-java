@@ -116,6 +116,19 @@ public class UserResource {
         );
     }
 
+    @PostMapping("/resetpassword/{key}/{password}/{confirmPassword}")
+    public ResponseEntity<HttpResponse> resetPassword(@PathVariable("key") String key, @PathVariable("password") String password, @PathVariable("confirmPassword") String confirmPassword){
+        userService.resetPasswordWithKey(key, password, confirmPassword);
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .message("Password reset successfully.")
+                        .build()
+        );
+    }
+
     private UserDTO getAuthenticatedUser(Authentication authentication){
         return ((UserPrincipal) authentication.getPrincipal()).getUser();
     }

@@ -174,6 +174,19 @@ public class UserRepositoryImpl implements UserRepository<User>, UserDetailsServ
         }
     }
 
+    @Override
+    public void resetPasswordWithKey(String key, String password, String confirmPassword) {
+        if(!password.equals(confirmPassword)) throw new ApiException("Passwords don't match. Please try again.");
+        try{
+            jdbc.update(UPDATE_USER_PASSWORD_BY_KEY, Map.of("password", encoder.encode(password) ,"url", getVerificationUrl(key, PASSWORD.getType())));
+            jdbc.update(DELETE_PASSWORD_VERIFICATIONS_BY_URL_QUERY, Map.of("url", getVerificationUrl(key, PASSWORD.getType())));
+        }
+        catch (Exception e){
+            log.error(e.getMessage());
+            throw new ApiException("An error occurred");
+        }
+    }
+
     private Boolean isResetPasswordVerificationUrlExpired(String key, VerificationType password) {
         try{
             return jdbc.queryForObject(SELECT_RESET_PASSWORD_URL_EXPIRATION_QUERY, Map.of("url", getVerificationUrl(key, password.getType())), Boolean.class);
