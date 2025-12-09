@@ -102,6 +102,20 @@ public class UserResource {
         );
     }
 
+    @GetMapping("/verify/password/{key}")
+    public ResponseEntity<HttpResponse> verifyPasswordKey(@PathVariable("key") String key){
+        UserDTO user = userService.verifyPasswordKey(key);
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .message("Please enter a new password.")
+                        .data(Map.of("user", user))
+                        .build()
+        );
+    }
+
     private UserDTO getAuthenticatedUser(Authentication authentication){
         return ((UserPrincipal) authentication.getPrincipal()).getUser();
     }

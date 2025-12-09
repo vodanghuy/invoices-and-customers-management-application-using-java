@@ -1,6 +1,7 @@
 package io.huyvo.securecapita.repository.implementation;
 
 import io.huyvo.securecapita.dto.UserDTO;
+import io.huyvo.securecapita.enumeration.VerificationType;
 import io.huyvo.securecapita.exception.ApiException;
 import io.huyvo.securecapita.model.*;
 import io.huyvo.securecapita.repository.*;
@@ -155,6 +156,34 @@ public class UserRepositoryImpl implements UserRepository<User>, UserDetailsServ
             log.info("Verification URL: {}", url);
         }catch (Exception exception){
             throw new ApiException("An error occurred. Please try again.");
+        }
+    }
+
+    @Override
+    public User verifyPasswordKey(String key) {
+        if(isResetPasswordVerificationUrlExpired(key, PASSWORD)) throw new ApiException("This link has expired. Please reset your password again");
+        try{
+            return jdbc.queryForObject(SELECT_USER_BY_RESET_PASSWORD_URL_QUERY, Map.of("url", getVerificationUrl(key, PASSWORD.getType())), new UserRowMapper());
+        }catch (EmptyResultDataAccessException e){
+            log.error(e.getMessage());
+            throw new ApiException("This link is invalid. Please reset your password again!");
+        }
+        catch (Exception e){
+            log.error(e.getMessage());
+            throw new ApiException("An error occurred");
+        }
+    }
+
+    private Boolean isResetPasswordVerificationUrlExpired(String key, VerificationType password) {
+        try{
+            return jdbc.queryForObject(SELECT_RESET_PASSWORD_URL_EXPIRATION_QUERY, Map.of("url", getVerificationUrl(key, password.getType())), Boolean.class);
+        }catch (EmptyResultDataAccessException e){
+            log.error(e.getMessage());
+            throw new ApiException("This link is invalid. Please reset your password again!");
+        }
+        catch (Exception e){
+            log.error(e.getMessage());
+            throw new ApiException("An error occurred");
         }
     }
 
