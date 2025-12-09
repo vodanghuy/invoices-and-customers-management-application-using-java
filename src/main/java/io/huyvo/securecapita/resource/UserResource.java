@@ -2,11 +2,14 @@ package io.huyvo.securecapita.resource;
 
 import io.huyvo.securecapita.dto.UserDTO;
 import io.huyvo.securecapita.dtomapper.UserDTOMapper;
+import io.huyvo.securecapita.exception.ApiException;
 import io.huyvo.securecapita.form.LoginForm;
 import io.huyvo.securecapita.model.*;
 import io.huyvo.securecapita.provider.TokenProvider;
 import io.huyvo.securecapita.service.RoleService;
 import io.huyvo.securecapita.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
@@ -20,6 +23,7 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import static io.huyvo.securecapita.utils.ExceptionUtils.processError;
 import static org.springframework.security.authentication.UsernamePasswordAuthenticationToken.unauthenticated;
 
 @RestController
@@ -31,12 +35,14 @@ public class UserResource {
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
     private final RoleService roleService;
+    private final HttpServletRequest request;
+    private final HttpServletResponse response;
 
     @PostMapping("/login")
     public ResponseEntity<HttpResponse> login(@RequestBody @Valid LoginForm loginForm){
-        authenticationManager.authenticate(unauthenticated(loginForm.getEmail(), loginForm.getPassword()));
-        UserDTO userDTO = userService.getUserByEmail(loginForm.getEmail());
-        return userDTO.getIsUsingMfa() ? sendVerificationCode(userDTO) : sendResponse(userDTO);
+        Authentication authentication = authenticate(loginForm.getEmail(), loginForm.getPassword());
+        UserDTO user = getAuthenticatedUser(authentication);
+        return user.getIsUsingMfa() ? sendVerificationCode(user) : sendResponse(user);
     }
 
     @PostMapping("/register")
@@ -83,6 +89,20 @@ public class UserResource {
         );
     }
 
+    private UserDTO getAuthenticatedUser(Authentication authentication){
+        return ((UserPrincipal) authentication.getPrincipal()).getUser();
+    }
+
+    private Authentication authenticate(String email, String password){
+        try{
+            Authentication authentication = authenticationManager.authenticate(unauthenticated(email,password));
+            return authentication;
+        }catch (Exception exception){
+            processError(request,response,exception);
+            throw new ApiException(exception.getMessage());
+        }
+    }
+
     private URI getUri(){
         return URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/get/<userId>").toUriString());
     }
@@ -103,7 +123,7 @@ public class UserResource {
     }
 
     private UserPrincipal getUserPrincipal(UserDTO user) {
-        return new UserPrincipal(UserDTOMapper.toUser(userService.getUserByEmail(user.getEmail())), roleService.getRoleByUserId(user.getId()).getPermissions());
+        return new UserPrincipal(UserDTOMapper.toUser(userService.getUserByEmail(user.getEmail())), roleService.getRoleByUserId(user.getId()));
     }
 
     private ResponseEntity<HttpResponse> sendVerificationCode(UserDTO userDTO) {

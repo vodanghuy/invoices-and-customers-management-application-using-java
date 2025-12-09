@@ -7,8 +7,10 @@ import com.auth0.jwt.exceptions.InvalidClaimException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import io.huyvo.securecapita.model.UserPrincipal;
+import io.huyvo.securecapita.service.UserService;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +28,7 @@ import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
 @Component
+@RequiredArgsConstructor
 public class TokenProvider {
 
     private static final String ISSUER = "VODANGHUY";
@@ -35,6 +38,7 @@ public class TokenProvider {
     private static final long REFRESH_TOKEN_EXPIRATION_TIME = 432_000_000;
     @Value("${jwt.secret}")
     private String secret;
+    private final UserService userService;
 
     public String createAccessToken(UserPrincipal userPrincipal){
         return JWT.create()
@@ -78,7 +82,7 @@ public class TokenProvider {
     }
 
     public Authentication getAuthentication(String email,List<GrantedAuthority> authorities, HttpServletRequest request){
-        UsernamePasswordAuthenticationToken usernamePasswordAuthToken = new UsernamePasswordAuthenticationToken(email, null, authorities);
+        UsernamePasswordAuthenticationToken usernamePasswordAuthToken = new UsernamePasswordAuthenticationToken(userService.getUserByEmail(email), null, authorities);
         usernamePasswordAuthToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         return usernamePasswordAuthToken;
     }
