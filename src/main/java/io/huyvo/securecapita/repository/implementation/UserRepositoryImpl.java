@@ -141,6 +141,23 @@ public class UserRepositoryImpl implements UserRepository<User>, UserDetailsServ
         }
     }
 
+    @Override
+    public void resetPassword(String email) {
+        if(getEmailCount(email.trim().toLowerCase()) <= 0){
+            throw new ApiException("There is no account with this email address");
+        }
+        try{
+            String expirationDate = DateFormatUtils.format(addDays(new Date(), 1), DATE_FORMAT);
+            String url = getVerificationUrl(UUID.randomUUID().toString(), PASSWORD.getType());
+            User user = getUserByEmail(email);
+            jdbc.update(DELETE_PASSWORD_VERIFICATIONS_BY_USER_ID_QUERY, Map.of("userId", user.getId()));
+            jdbc.update(INSERT_PASSWORD_VERIFICATIONS_QUERY, Map.of("userId", user.getId(), "url", url, "expirationDate", expirationDate));
+            log.info("Verification URL: {}", url);
+        }catch (Exception exception){
+            throw new ApiException("An error occurred. Please try again.");
+        }
+    }
+
     private Boolean isVerificationCodeExpired(String code) {
         try{
             return jdbc.queryForObject(SELECT_CODE_EXPIRATION_QUERY, Map.of("code", code), Boolean.class);

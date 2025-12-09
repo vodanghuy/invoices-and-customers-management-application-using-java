@@ -89,6 +89,19 @@ public class UserResource {
         );
     }
 
+    @GetMapping("/resetpassword/{email}")
+    public ResponseEntity<HttpResponse> resetPassword(@PathVariable("email") String email){
+        userService.resetPassword(email);
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .message("Email sent. Please check your email to reset password.")
+                        .build()
+        );
+    }
+
     private UserDTO getAuthenticatedUser(Authentication authentication){
         return ((UserPrincipal) authentication.getPrincipal()).getUser();
     }

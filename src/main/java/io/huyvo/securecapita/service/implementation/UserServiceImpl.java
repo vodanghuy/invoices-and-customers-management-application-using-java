@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService {
         return mapToUserDTO(userRepository.verifyCode(email, code));
     }
 
+    @Override
+    public void resetPassword(String email) {
+        userRepository.resetPassword(email);
+    }
+
     private UserDTO mapToUserDTO(User user){
         return fromUser(user, roleRepository.getRoleByUserId(user.getId()));
     }
