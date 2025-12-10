@@ -129,6 +129,19 @@ public class UserResource {
         );
     }
 
+    @GetMapping("/verify/account/{key}")
+    public ResponseEntity<HttpResponse> verifyAccount(@PathVariable("key") String key){
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now().toString())
+                        .message(userService.verifyAccount(key).getEnabled() ? "Account already verified" : "Account verified")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
+
+
     private UserDTO getAuthenticatedUser(Authentication authentication){
         return ((UserPrincipal) authentication.getPrincipal()).getUser();
     }
