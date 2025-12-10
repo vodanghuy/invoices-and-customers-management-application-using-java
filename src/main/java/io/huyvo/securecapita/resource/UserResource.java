@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 import static io.huyvo.securecapita.utils.ExceptionUtils.processError;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.security.authentication.UsernamePasswordAuthenticationToken.unauthenticated;
 
 @RestController
@@ -31,6 +32,7 @@ import static org.springframework.security.authentication.UsernamePasswordAuthen
 @RequiredArgsConstructor
 public class UserResource {
 
+    private static final String TOKEN_PREFIX = "Bearer ";
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
@@ -139,6 +141,41 @@ public class UserResource {
                         .statusCode(HttpStatus.OK.value())
                         .build()
         );
+    }
+
+    @GetMapping("/refresh/token")
+    public ResponseEntity<HttpResponse> refreshToken(HttpServletRequest request){
+        if(isHeaderAndTokenValid(request)){
+            String token = request.getHeader(AUTHORIZATION).substring(TOKEN_PREFIX.length());
+            UserDTO user = userService.getUserByEmail(tokenProvider.getSubject(token, request));
+            return ResponseEntity.ok().body(
+                    HttpResponse.builder()
+                            .timeStamp(LocalDateTime.now().toString())
+                            .message("Token refresh")
+                            .status(HttpStatus.OK)
+                            .statusCode(HttpStatus.OK.value())
+                            .data(Map.of("accessToken", tokenProvider.createAccessToken(getUserPrincipal(user)),
+                                    "refreshToken", token,
+                                    "user", user))
+                            .build()
+            );
+        }else {
+            return ResponseEntity.badRequest().body(
+                    HttpResponse.builder()
+                            .timeStamp(LocalDateTime.now().toString())
+                            .message("Refresh token is missing or invalid")
+                            .developerMessage("Refresh token is missing or invalid")
+                            .status(HttpStatus.BAD_REQUEST)
+                            .statusCode(HttpStatus.BAD_REQUEST.value())
+                            .build()
+            );
+        }
+    }
+
+    private boolean isHeaderAndTokenValid(HttpServletRequest request) {
+        return request.getHeader(AUTHORIZATION) != null
+                && request.getHeader(AUTHORIZATION).startsWith(TOKEN_PREFIX)
+                && tokenProvider.isTokenValid(tokenProvider.getSubject(request.getHeader(AUTHORIZATION).substring(TOKEN_PREFIX.length()),request), request.getHeader(AUTHORIZATION).substring(TOKEN_PREFIX.length()));
     }
 
 
