@@ -100,7 +100,15 @@ public class UserRepositoryImpl implements UserRepository<User>, UserDetailsServ
 
     @Override
     public User getUserByEmail(String email) {
-        return jdbc.queryForObject(SELECT_USER_BY_EMAIL_QUERY, Map.of("email", email), new UserRowMapper());
+        try{
+            return jdbc.queryForObject(SELECT_USER_BY_EMAIL_QUERY, Map.of("email", email), new UserRowMapper());
+        }catch (EmptyResultDataAccessException e){
+            throw new ApiException("No user found by email: " + email);
+        }
+        catch (Exception exception){
+            log.error(exception.getMessage());
+            throw new ApiException("An error occurred");
+        }
     }
 
     @Override
