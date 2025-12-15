@@ -19,6 +19,13 @@ export class UserService {
     catchError(this.handleError)
   );
 
+  verifyCode$ = (email: string, code: string) => <Observable<CustomHttpResponse<Profile>>>
+  this.http.get<CustomHttpResponse<Profile>>(`${this.server}/user/verify/code/${email}/${code}`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
   handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage: string;
     if(error.error instanceof ErrorEvent){

@@ -59,4 +59,24 @@ export class LoginComponent {
         })
       );
   }
+
+  verifyCode(verifyCodeForm: NgForm): void{
+    this.loginState$ = this.userService.verifyCode$(this.emailObject.value, verifyCodeForm.value.code)
+    .pipe(
+      map((response) => {
+        localStorage.setItem(Key.TOKEN, response.data.accessToken);
+        localStorage.setItem(Key.REFRESH_TOKEN, response.data.refreshToken);
+        this.router.navigate[''];
+        return { dataState: DataState.LOADED, loginSuccess: true };
+      }),
+      startWith({ dataState: DataState.LOADING, isUsingMfa: true }),
+      catchError((error: string) => {
+        return of({ dataState: DataState.ERROR, loginSuccess: false, isUsingMfa: true, error, phone: this.phoneObject.value.substring(this.phoneObject.value.length - 4)})
+      })
+    );
+  }
+
+  loginPage():void {
+    this.loginState$ = of({dataState: DataState.LOADED});
+  }
 }
