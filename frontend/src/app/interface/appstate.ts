@@ -21,7 +21,7 @@ export interface CustomHttpResponse<T> {
 }
 
 export interface Profile{
-    data?: User;
+    user?: User;
     accessToken: string;
     refreshToken: string;
 }
