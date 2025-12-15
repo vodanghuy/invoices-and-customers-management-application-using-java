@@ -62,7 +62,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource(){
         var corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:3000", "http://securecapita.org"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:4200", "http://localhost:3000", "http://securecapita.org"));
         //corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
         corsConfiguration.setAllowedHeaders(Arrays.asList(
                 "Origin", "Access-Control-Allow-Origin", "Content-Type",
