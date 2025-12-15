@@ -80,7 +80,7 @@ public class HandleException extends ResponseEntityExceptionHandler implements E
         log.error(exception.getMessage());
         return new ResponseEntity<>(
                 HttpResponse.builder()
-                        .reason(exception.getMessage() + ", Incorrect email or password.")
+                        .reason("Incorrect email or password. Please try again!")
                         .developerMessage(exception.getMessage())
                         .status(BAD_REQUEST)
                         .statusCode(BAD_REQUEST.value())

@@ -184,13 +184,8 @@ public class UserResource {
     }
 
     private Authentication authenticate(String email, String password){
-        try{
-            Authentication authentication = authenticationManager.authenticate(unauthenticated(email,password));
-            return authentication;
-        }catch (Exception exception){
-            processError(request,response,exception);
-            throw new ApiException(exception.getMessage());
-        }
+        Authentication authentication = authenticationManager.authenticate(unauthenticated(email,password));
+        return authentication;
     }
 
     private URI getUri(){
