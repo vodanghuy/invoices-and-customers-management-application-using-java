@@ -23,6 +23,7 @@ export class LoginComponent {
   loginState$: Observable<LoginState> = of({ dataState: DataState.LOADED });
   private phoneObject = new BehaviorSubject<string | null>(null);
   private emailObject = new BehaviorSubject<string | null>(null);
+  readonly DataState = DataState;
 
   constructor(private router: Router, private userService: UserService) {}
 
