@@ -27,7 +27,7 @@ export class UserService {
     catchError(this.handleError)
   );
 
-  profile$ = () => <Observable<State<CustomHttpResponse<Profile>>>>
+  profile$ = () => <Observable<CustomHttpResponse<Profile>>>
   this.http.get<CustomHttpResponse<Profile>>
   (`${this.server}/user/profile`, {headers: new HttpHeaders().set('Authorization', 'Bearer')})
   .pipe(
