@@ -104,7 +104,7 @@ public class UserRepositoryImpl implements UserRepository<User>, UserDetailsServ
             return jdbc.queryForObject(SELECT_USER_BY_EMAIL_QUERY, Map.of("email", email), new UserRowMapper());
         }catch (EmptyResultDataAccessException e){
             log.error(e.getMessage());
-            throw new ApiException("Incorrect email or password. Please try again!");
+            throw new ApiException("No user found by email: " + email);
         }
         catch (Exception exception){
             log.error(exception.getMessage());

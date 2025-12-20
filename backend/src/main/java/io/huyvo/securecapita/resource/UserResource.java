@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 import static io.huyvo.securecapita.utils.ExceptionUtils.processError;
+import static io.huyvo.securecapita.utils.UserUtils.getAuthenticatedUser;
+import static io.huyvo.securecapita.utils.UserUtils.getLoggedInUser;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.security.authentication.UsernamePasswordAuthenticationToken.unauthenticated;
 
@@ -43,7 +45,7 @@ public class UserResource {
     @PostMapping("/login")
     public ResponseEntity<HttpResponse> login(@RequestBody @Valid LoginForm loginForm){
         Authentication authentication = authenticate(loginForm.getEmail(), loginForm.getPassword());
-        UserDTO user = getAuthenticatedUser(authentication);
+        UserDTO user = getLoggedInUser(authentication);
         return user.getIsUsingMfa() ? sendVerificationCode(user) : sendResponse(user);
     }
 
@@ -79,7 +81,7 @@ public class UserResource {
 
     @GetMapping("/profile")
     public ResponseEntity<HttpResponse> profile(Authentication authentication){
-        UserDTO user = userService.getUserByEmail(authentication.getName());
+        UserDTO user = userService.getUserByEmail(getAuthenticatedUser(authentication).getEmail());
         return ResponseEntity.ok().body(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now().toString())
@@ -176,11 +178,6 @@ public class UserResource {
         return request.getHeader(AUTHORIZATION) != null
                 && request.getHeader(AUTHORIZATION).startsWith(TOKEN_PREFIX)
                 && tokenProvider.isTokenValid(tokenProvider.getSubject(request.getHeader(AUTHORIZATION).substring(TOKEN_PREFIX.length()),request), request.getHeader(AUTHORIZATION).substring(TOKEN_PREFIX.length()));
-    }
-
-
-    private UserDTO getAuthenticatedUser(Authentication authentication){
-        return ((UserPrincipal) authentication.getPrincipal()).getUser();
     }
 
     private Authentication authenticate(String email, String password){
