@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6fed81d7-118d-4c0f-a767-7463953820c2" name="Changes" comment="Refresh token." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vodanghuy&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/vodanghuy/invoices-and-customers-management-application-using-java.git&quot;,
+    &quot;accountId&quot;: &quot;4d328a3c-ed88-4a73-8fc5-dd58181cfeb0&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="353GAEWMxW8lGiIgud9IC3Z1j8i" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.SecurecapitaApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/code-learning/securecapita/backend"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code-learning\securecapita\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="SecurecapitaApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.huyvo.securecapita.SecurecapitaApplication" />
+      <module name="securecapita" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.huyvo.securecapita.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SecurecapitaApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6fed81d7-118d-4c0f-a767-7463953820c2" name="Changes" comment="" />
+      <created>1762331195502</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762331195502</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Database config">
+      <option name="closed" value="true" />
+      <created>1762332830393</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762332830393</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update file .yml to create tables base on schema.sql file">
+      <option name="closed" value="true" />
+      <created>1762441141598</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1762441141598</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add UserRepository">
+      <option name="closed" value="true" />
+      <created>1763107343150</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1763107343150</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add User class">
+      <option name="closed" value="true" />
+      <created>1763132124977</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1763132124977</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add RoleModel and RoleRepository">
+      <option name="closed" value="true" />
+      <created>1763176920375</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1763176920375</updated>
+    </task>
+    <task id="LOCAL-00006" summary="build create user functionality">
+      <option name="closed" value="true" />
+      <created>1763452832372</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1763452832372</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add role to user after create user">
+      <option name="closed" value="true" />
+      <created>1763454202418</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1763454202418</updated>
+    </task>
+    <task id="LOCAL-00008" summary="get account verification url and save in AccountVerifications table">
+      <option name="closed" value="true" />
+      <created>1763454817062</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1763454817062</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add UserResource to test create user function on postman">
+      <option name="closed" value="true" />
+      <created>1763522987557</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1763522987557</updated>
+    </task>
+    <task id="LOCAL-00010" summary="update schema.sql file (permissions VARCHAR(50) -&gt; VARCHAR(255)), cleaning UserRepositoryImpl.java (less import)">
+      <option name="closed" value="true" />
+      <created>1763523063638</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1763523063638</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Consider defining a bean of type 'org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder' in your configuration.">
+      <option name="closed" value="true" />
+      <created>1763531727603</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1763531727603</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add log.error for createUser functionality; turn off security auto configuration to turn off login request to test on postman (temporary)">
+      <option name="closed" value="true" />
+      <created>1763532301030</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1763532301030</updated>
+    </task>
+    <task id="LOCAL-00013" summary="profiles setup - để chia tách môi trường dev-test-prod, mỗi file sẽ chứa config riêng, giúp triển khai dễ dàng và linh hoạt.">
+      <option name="closed" value="true" />
+      <created>1763619184890</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1763619184890</updated>
+    </task>
+    <task id="LOCAL-00014" summary="spring boot security configuration (step 1)">
+      <option name="closed" value="true" />
+      <created>1764166389213</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1764166389214</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add AccessDeniedHandler and AuthenticationEntryPoint (step 2)">
+      <option name="closed" value="true" />
+      <created>1764166983829</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1764166983829</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add UserPrincipal class (step 3)">
+      <option name="closed" value="true" />
+      <created>1764167958453</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1764167958453</updated>
+    </task>
+    <task id="LOCAL-00017" summary="update SecurityConfig.java (setUserDetailsService for authProvider)">
+      <option name="closed" value="true" />
+      <created>1764168237950</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1764168237950</updated>
+    </task>
+    <task id="LOCAL-00018" summary="add login method in UserResource class; write getUserByEmail function for UserService and UserRepository class; add imageUrl variable for User class">
+      <option name="closed" value="true" />
+      <created>1764169185504</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1764169185504</updated>
+    </task>
+    <task id="LOCAL-00019" summary="implements UserDetailsService and override its loadUserByUserName method; finish roleRepository.getRoleByUserId method">
+      <option name="closed" value="true" />
+      <created>1764169593489</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1764169593489</updated>
+    </task>
+    <task id="LOCAL-00020" summary="add /user/login/** url for PUBLIC_URLS in SecurityConfig.java">
+      <option name="closed" value="true" />
+      <created>1764169644660</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1764169644660</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Import the two required dependencies and update the UserResource.java to implement a function that sends verification code via SMS (MFA)">
+      <option name="closed" value="true" />
+      <created>1764339197705</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1764339197705</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Implement SMS verification code functionality and add supporting classes">
+      <option name="closed" value="true" />
+      <created>1764340214883</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1764340214883</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Add the java-jwt dependency to support JWT implementation; introduce the TokenProvider class with core functionalities createAccessToken and createRefreshToken, along with related supporting methods for the class">
+      <option name="closed" value="true" />
+      <created>1764404690944</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1764404690944</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Update the sendResponse method in UserResource by adding accessToken and refreshToken to the data field and introducing the getUserPrincipal method; implement userService.getUser() to retrieve the user object; add the UserService interface to provide permission data for the getUserPrincipal functionality.">
+      <option name="closed" value="true" />
+      <created>1764410067780</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1764410067780</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Implement MFA verification functionality, including: adding the verifyCode method in UserRepositoryImpl, creating queries SELECT_USER_BY_CODE and DELETE_CODE, adding the url &quot;/user/verify/code/**&quot; endpoint to PUBLIC_URLS; updating the login response message for users with MFA enabled, and adding the jwt.secret value to the configuration file.">
+      <option name="closed" value="true" />
+      <created>1764602173985</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1764602173985</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Delete method getUser() and use UserDTOMapper.toUser instead. (code refactoring)">
+      <option name="closed" value="true" />
+      <created>1764664535018</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1764664535018</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Add the roleName and permission fields to the UserDTO class; introduce the mapToUerDTO method to replace multiple calls to UserDTOMapper.fromUser">
+      <option name="closed" value="true" />
+      <created>1764665257571</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1764665257571</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Implement the isVerificationCodeExpired method to determine whether the verification code has expired.">
+      <option name="closed" value="true" />
+      <created>1764666008881</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1764666008881</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Authorization Filter Configuration - check and verify request access permission.">
+      <option name="closed" value="true" />
+      <created>1765022795923</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1765022795923</updated>
+    </task>
+    <task id="LOCAL-00030" summary="UserResource.java update: new UsernamePasswordAuthenticationToken() -&gt; unauthenticated()">
+      <option name="closed" value="true" />
+      <created>1765032382772</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1765032382772</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Implement ExceptionUtils class to handle responses when errors occur in the doFilterInternal method of CustomAuthorizationFilter class.">
+      <option name="closed" value="true" />
+      <created>1765076998570</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1765076998570</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Implement the HandleException class to catch and handle all errors occur.">
+      <option name="closed" value="true" />
+      <created>1765080948411</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1765080948411</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Add the &quot;/user/register/**&quot; value to PUBLIC_URLS in the SecurityConfig class.">
+      <option name="closed" value="true" />
+      <created>1765081006648</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1765081006648</updated>
+    </task>
+    <task id="LOCAL-00034" summary="(Code Refactoring) - Replace the String permission field in UserPrincipal with a Role object and add the getUser() method to return a UserDTO; add the getAuthenticatedUser method (returning a UserDTO via the new getUser() method)  and the authenticate method (handling user authentication) to the UserResource class.">
+      <option name="closed" value="true" />
+      <created>1765263082322</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1765263082322</updated>
+    </task>
+    <task id="LOCAL-00035" summary="(Reset Password Functionality) - Sending verification url.">
+      <option name="closed" value="true" />
+      <created>1765269792886</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1765269792886</updated>
+    </task>
+    <task id="LOCAL-00036" summary="(Reset Password Functionality) - Verifying password key.">
+      <option name="closed" value="true" />
+      <created>1765273852480</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1765273852480</updated>
+    </task>
+    <task id="LOCAL-00037" summary="(Reset Password Functionality) - Reset password.">
+      <option name="closed" value="true" />
+      <created>1765281710107</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1765281710107</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Account verification after registered successfully.">
+      <option name="closed" value="true" />
+      <created>1765338973846</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1765338973846</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Refresh token.">
+      <option name="closed" value="true" />
+      <created>1765351369316</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1765351369316</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add AccessDeniedHandler and AuthenticationEntryPoint (step 2)" />
+    <MESSAGE value="add UserPrincipal class (step 3)" />
+    <MESSAGE value="update SecurityConfig.java (setUserDetailsService for authProvider)" />
+    <MESSAGE value="add login method in UserResource class; write getUserByEmail function for UserService and UserRepository class; add imageUrl variable for User class" />
+    <MESSAGE value="implements UserDetailsService and override its loadUserByUserName method; finish roleRepository.getRoleByUserId method" />
+    <MESSAGE value="add /user/login/** url for PUBLIC_URLS in SecurityConfig.java" />
+    <MESSAGE value="Import the two required dependencies and update the UserResource.java to implement a function that sends verification code via SMS (MFA)" />
+    <MESSAGE value="Implement SMS verification code functionality and add supporting classes" />
+    <MESSAGE value="Add the java-jwt dependency to support JWT implementation; introduce the TokenProvider class with core functionalities createAccessToken and createRefreshToken, along with related supporting methods for the class" />
+    <MESSAGE value="Update the sendResponse method in UserResource by adding accessToken and refreshToken to the data field and introducing the getUserPrincipal method; implement userService.getUser() to retrieve the user object; add the UserService interface to provide permission data for the getUserPrincipal functionality." />
+    <MESSAGE value="Implement MFA verification functionality, including: adding the verifyCode method in UserRepositoryImpl, creating queries SELECT_USER_BY_CODE and DELETE_CODE, adding the url &quot;/user/verify/code/**&quot; endpoint to PUBLIC_URLS; updating the login response message for users with MFA enabled, and adding the jwt.secret value to the configuration file." />
+    <MESSAGE value="Delete method getUser() and use UserDTOMapper.toUser instead. (code refactoring)" />
+    <MESSAGE value="Add the roleName and permission fields to the UserDTO class; introduce the mapToUerDTO method to replace multiple calls to UserDTOMapper.fromUser" />
+    <MESSAGE value="Implement the isVerificationCodeExpired method to determine whether the verification code has expired." />
+    <MESSAGE value="Authorization Filter Configuration - check and verify request access permission." />
+    <MESSAGE value="UserResource.java update: new UsernamePasswordAuthenticationToken() -&gt; unauthenticated()" />
+    <MESSAGE value="Implement ExceptionUtils class to handle responses when errors occur in the doFilterInternal method of CustomAuthorizationFilter class." />
+    <MESSAGE value="Implement the HandleException class to catch and handle all errors occur." />
+    <MESSAGE value="Add the &quot;/user/register/**&quot; value to PUBLIC_URLS in the SecurityConfig class." />
+    <MESSAGE value="(Code Refactoring) - Replace the String permission field in UserPrincipal with a Role object and add the getUser() method to return a UserDTO; add the getAuthenticatedUser method (returning a UserDTO via the new getUser() method)  and the authenticate method (handling user authentication) to the UserResource class." />
+    <MESSAGE value="(Reset Password Functionality) - Sending verification url." />
+    <MESSAGE value="(Reset Password Functionality) - Verifying password key." />
+    <MESSAGE value="(Reset Password Functionality) - Reset password." />
+    <MESSAGE value="Account verification after registered successfully." />
+    <MESSAGE value="Refresh token." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refresh token." />
+  </component>
+</project>
