@@ -1,4 +1,4 @@
-<ng-container>
+<ng-container *ngIf="(profileState$ | async) as state">
     <ng-container>
        <app-navbar></app-navbar>
        <section>
