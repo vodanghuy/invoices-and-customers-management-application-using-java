@@ -1,7 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomHttpResponse, Profile } from '../interface/appstate';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { State } from '../interface/state';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,14 @@ export class UserService {
 
   verifyCode$ = (email: string, code: string) => <Observable<CustomHttpResponse<Profile>>>
   this.http.get<CustomHttpResponse<Profile>>(`${this.server}/user/verify/code/${email}/${code}`)
+  .pipe(
+    tap(console.log),
+    catchError(this.handleError)
+  );
+
+  profile$ = () => <Observable<State<CustomHttpResponse<Profile>>>>
+  this.http.get<CustomHttpResponse<Profile>>
+  (`${this.server}/user/profile`, {headers: new HttpHeaders().set('Authorization', 'Bearer')})
   .pipe(
     tap(console.log),
     catchError(this.handleError)
